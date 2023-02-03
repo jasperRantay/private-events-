@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>User List</h1>
+    <ul>
+    <% @users.each do |user| %>
+        <div>
+        
+            <% if Registration.exists?(user:user, event:@event.id)%>
+                <p><%= user.name %> (Attending)</p>
+            <%else%>
+            <%= user.name %>
+            <%= link_to "Send Invite"%>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+    </ul>
+</div>

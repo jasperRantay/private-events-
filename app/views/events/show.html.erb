@@ -1,0 +1,29 @@
+<div class="event-details">
+    <div class="top">
+        <div class="left">
+            <h2><%= @event.name %></h2>
+            <strong>Event creator: <%=  @event.user.email %></strong>
+            <div class="details"><span class="date"><%= @event.date %></span> in <%= @event.location %></div>
+            <p><%= @event.description %></p>
+            <% if current_user.email == @event.user.email%>
+                <%= link_to "Edit", edit_event_path%>
+                <%= link_to "Delete", event_path, data:
+                                             {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+            <%end%>   
+        </div>
+    </div>
+
+    <div class="register"> 
+        <div class="link-bottom">
+            <div>
+                <%= link_to "Attend Event", new_event_registration_path(@event)%>
+            </div>
+            <div>
+                <%= link_to "Who's attending?", event_registrations_path(@event) %>
+            </div>
+            <div>
+                <%= link_to "Send Invitation", event_users_path(@event)%>
+            </div>
+        </div>
+    </div>
+</div>
