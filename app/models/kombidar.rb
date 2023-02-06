@@ -1,0 +1,2 @@
+class Kombidar < ApplicationRecord
+end

@@ -1,4 +1,4 @@
-<section class="event-list">
+<div class="main-container">
     <% @events.each do |event| %>
         <div class="event">
             <div class="event-name"><%= link_to event.name, event%></div>
@@ -7,4 +7,4 @@
             </div>
         </div>
     <% end %>
-</section>
+</div>

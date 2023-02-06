@@ -1,0 +1,28 @@
+
+
+<% if @kombidas.present?%>
+        <% @kombidas.each do |inviter|%>
+        <%if @event.id == inviter.event_id%>
+
+        <%if @invitee.present?%>
+                <p>u registerdere</p>
+        <%else%>
+            <h1>From: </h1><span><%=inviter.user.name %>
+            
+            <div>
+                <%= link_to 'Accept', event_user_invitees_path(:user_id => current_user.id, :event_id => inviter.event_id),#, :kombida_id => inviter.id),
+                                            data: { turbo_method: :post }, class: 'btn' %>
+
+                            
+            </div>
+
+                <%= link_to "Decline",  event_user_kombida_path(:user_id=> inviter.user.id, :event_id=> inviter.event_id), data:{
+                                        turbo_method: :delete,
+                                        turbo_confirm: "Are you sure!"
+                                                            }%>
+            </div>
+        <%end%>
+
+    <% end%> 
+<%end%>
+<%end%>

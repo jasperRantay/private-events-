@@ -1,15 +1,31 @@
 <div class="container">
   <h2>Attendees for <%= link_to @event.name, @event %></h2>
   <ul class="registrations">
-    <% @registrations.each do |r| %>
-      <div>
-        <%= r.name%> &bull; <%= r.how_heard%>
+    <% @registrations.each do |r|%>
+      <div class="attendee">
+        <p><%= r.name%> &bull; <%= r.how_heard%></p>
         <% if current_user.name == r.name%>
         <%= link_to "Cancel", "/events/#{@event.id}/registrations/#{r.id}", data:
                                              {turbo_method: :delete, turbo_confirm: 'Are you sure?'}  %>
         <% end%>
       </div> 
     <% end %>
-    
+      
+        <div class="attendee">
+          <%  @invitees.each do |inv|%>
+          <% if inv.event.name == @event.name%>
+
+              <p><%= inv.user.name%> &bull; <%#= inv.event.name%>Other</p>
+             <%if inv.user.name == current_user.name%>
+              <%= link_to "Cancel",  "/events/#{inv.event.id}/users/#{current_user.id}/invitees/#{inv.user.id}", data:{
+                                  turbo_method: :delete,
+                                  turbo_confirm: "Are you sure!"
+                                                      }%>
+
+              <%end%>
+            <%end%>
+            
+        <% end%>
+      </div> 
   </ul> 
 <div>

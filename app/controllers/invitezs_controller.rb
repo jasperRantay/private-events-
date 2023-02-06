@@ -1,0 +1,2 @@
+class InvitezsController < ApplicationController
+end

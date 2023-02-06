@@ -1,0 +1,10 @@
+<div>
+    <% if @invites.present?%>
+        <% @invites.each do |user|%>
+            <li>
+                <%= user.id%>
+            </li>
+        <% end%>
+
+    <%end%>
+</div>

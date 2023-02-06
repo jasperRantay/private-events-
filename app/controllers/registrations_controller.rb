@@ -3,6 +3,8 @@ class RegistrationsController < ApplicationController
     before_action :authenticate_user!
 
     def index
+
+        @invitees = Invitee.all
         @event = Event.find(params[:event_id])
       
         @registrations = @event.registrations
@@ -16,15 +18,16 @@ class RegistrationsController < ApplicationController
     end
 
 
-    def create 
-        @event = Event.find(params[:event_id])
-        @registration = @event.registrations.new(registration_params)
-        if @registration.save
-            redirect_to event_registrations_url(@event),
-             notice: "Thanks for attending"
-        else
-            render :new
-        end
+    def create
+
+         @event = Event.find(params[:event_id]) 
+            @registration = @event.registrations.new(registration_params)
+            if @registration.save
+                redirect_to event_registrations_url(@event),
+                notice: "Thanks for attending"
+            else
+                render :new
+            end
     end
 
     def show
@@ -35,10 +38,6 @@ class RegistrationsController < ApplicationController
         @registration = current_user.registrations.find(params[:id])
         @registration.destroy
         redirect_to events_url, notice: "Cancelled"
-        # @event.registrations.find(params[:id])
-        # @registration = @event
-        # @registration.destroy
-        # redirect_to event_path(@event), notice: "Cancelled"
     end
     private
 

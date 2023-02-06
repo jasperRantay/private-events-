@@ -1,17 +1,23 @@
 <div class="container">
-    <h1>User List</h1>
-    <ul>
-    <% @users.each do |user| %>
-        <div>
-        
-            <% if Registration.exists?(user:user, event:@event.id)%>
-                <p><%= user.name %> (Attending)</p>
-            <%else%>
-            <%= user.name %>
-            <%= link_to "Send Invite"%>
+    <div>
+        <h1>User List for <%= link_to @event.name, @event%></h1>
+        <div style = "margin-top: 64px">
+         <h3>Attending</h3>
+            <% @users.each do |user| %>
+                <div> 
+                    <% if Registration.exists?(user:user, event:@event.id)%>
+                        <p><%= user.name %> (Attending)</p>
+                    <%else%>
+                    <div class="container">
+                        <%= user.name %>
+                        <%#= link_to "Send Invite", "/events/#{@event.id}/users/#{current_user.id}/invites/"%>
+                        <%#= link_to "Send Invite", "/events/#{@event.id}/users/#{current_user.id}/kombidas"%>
+                        <%= link_to 'Invite', event_user_kombidas_path(:event_id => @event.id, :user_id=> current_user.id),
+                          data: { turbo_method: "post" }, class: 'button' %>
+
+                    </div>
+                <% end%>
             <% end %>
         </div>
     </div>
-    <% end %>
-    </ul>
 </div>
